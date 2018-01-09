@@ -1,0 +1,86 @@
+<template name='customer'>
+	{{>page_header}}
+	<div class='container'>
+		<br/>
+		<div class='row'>
+			<div class='col-md-6'>
+				<div class="panel panel-default">
+					<div class="panel-heading"><h5>Products</h5></div>
+		        	<div class="panel-body">
+		        		<div class='row'>
+		        			<div class='col-md-1'><b></b></div>
+		        			<div class='col-md-3'><b>Product Name</b></div>
+							<div class='col-md-2'><b>Price</b></div>
+							<div class='col-md-6'><b>Product Description</b></div>
+							<hr/>
+							{{#each getInventories}}
+						      {{>inventory_list}}
+						      <br/>
+						      <hr/>
+						    {{/each}}
+		        		</div>
+		        		<div class='col-md-12'>
+		        			<div class='pull-right'>
+		        				<input type='button' class='btn btn-primary btn-sm' id='add-cart-btn' value='Add to cart'/>
+		        			</div>
+					    </div>
+		        	</div>
+				</div>
+			</div>
+			<div class='col-md-6'>
+				{{>cart}}
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name='inventory_list'>
+	<div class='col-md-1'><input type='checkbox' name='products-checkbox' class='products-checkbox' value={{_id}} /></div>
+	<div class='col-md-3'>{{name}}</div>
+	<div class='col-md-2'>{{price}}</div>
+	<div class='col-md-6'>{{description}}</div>
+</template>
+
+<template name='cart'>
+	<div class="panel panel-default">
+		<div class="panel-heading"><h5>Cart</h5></div>
+        <div class="panel-body">
+        	<div class='row'>
+        		<div class='col-md-2'><b>Quantity</b></div>
+        		<div class='col-md-4'><b>Product Name</b></div>
+        		<div class='col-md-3'><b>Price</b></div>
+        		<div class='col-md-3'><b>Total</b></div>
+        		<hr/>
+	        	{{#each getCart}}
+			      {{>cart_list}}
+			      <br/>
+			      <hr/>
+			    {{/each}}
+			    <div class='col-md-12'>
+			    	<div class='pull-right'>
+			    		<b>Total price: <span id='total-price-label'>{{recompute}}</span></b>
+
+			    	</div>
+			    </div>
+			    <div class='col-md-12'>
+			    	<br/>
+			    	<div class='pull-right'>
+				    	<input type='button' class='btn btn-success btn-sm' id='update-cart-btn' value='Save'/>
+	    				<input type='button' class='btn btn-danger btn-sm' id='cancel-cart-btn' value='Cancel'/>
+	    			</div>
+			    </div>
+		    </div>
+        </div>
+    </div>
+	
+    
+</template>
+
+<template name='cart_list'>
+	<div class='col-md-2'>
+		<input type='number' id={{_id}} class='products-quantity form-control input-sm' value={{quantity}} />
+	</div>
+	<div class='col-md-4'>{{inventory.name}}</div>
+	<div class='col-md-3'>{{inventory.price}}</div>
+	<div class='col-md-3 total-prices' id={{concat _id '-total'}}>{{computeTotal inventory.price quantity}}</div>
+</template>

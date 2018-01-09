@@ -1,0 +1,142 @@
+<head>
+  <title>Inventory</title>
+</head>
+
+<template name="admin">
+  {{>page_header}}
+  <div class='container'>
+      <br/>
+      {{>inventory_create}}
+      <div class="panel panel-default">
+        <div class="panel-heading"><h5>List</h5></div>
+        <div class="panel-body">
+          <div class='row'>
+              <div class='col-md-3'><b>Product Name</b></div>
+              <div class='col-md-5'><b>Product Description</b></div>
+              <div class='col-md-1'><b>Price</b></div>
+              <div class='col-md-3'><b>Stock</b></div>
+              <hr/>
+              {{#each getInventories}}
+                  {{> inventory_item}}
+                  <hr/>
+              {{/each}}
+          </div>
+        </div>
+      </div>
+      {{>inventory_update_modal}}
+  </div>
+</template>
+
+<template name="inventory_item">
+      <div class='col-md-3'>{{name}}</div>
+      <div class='col-md-5'>{{description}}</div>
+      <div class='col-md-1'>{{price}}</div>
+      <div class='col-md-1'>{{stock}}</div>
+      <div class='col-md-2'>
+          {{#if published}}
+            <button type="button" id={{_id}} class="publish-unpublish-btn btn btn-primary btn-sm"
+              data-toggle="tooltip" data-placement="top" title="Unpublish">
+              <span class="glyphicon glyphicon-eye-close"></span> 
+            </button>
+          {{else}}
+            <button type="button" id={{_id}} class="publish-unpublish-btn btn btn-primary btn-sm"
+              data-toggle="tooltip" data-placement="top" title="Publish">
+              <span class="glyphicon glyphicon-eye-open"></span> 
+            </button>
+          {{/if}}
+          <button type="button" id={{_id}} class="update-btn btn btn-success btn-sm"
+            data-toggle="tooltip" data-placement="top" title="Update">
+            <span class="glyphicon glyphicon-pencil"></span> 
+          </button>
+          <button type="button" id={{_id}} tip='Delete' class="del-btn btn btn-danger btn-sm"
+            data-toggle="tooltip" data-placement="top" title="Delete">
+            <span class="glyphicon glyphicon-trash"></span> 
+          </button>
+      </div>
+      <br/>
+</template>
+
+<template name="inventory_create">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h5>Add</h5></div>
+      <div class="panel-body">
+        <div class='row'>
+          <div class='col-md-8'>
+            <div class="form-group">
+              <b>Name:</b><br/><input type='text' class='form-control input-sm' id='add-name'/>
+            </div>
+          </div>
+          <div class='col-md-2'>
+            <div class="form-group">
+              <b>Price:</b><br/><input type='number' class='form-control input-sm' id='add-price'/>
+            </div>
+          </div>
+          <div class='col-md-2'>
+            <div class="form-group">
+              <b>Stock:</b><br/><input type='number' class='form-control input-sm' id='add-stock'/>
+            </div>
+          </div>
+          <div class='col-md-12'>
+            <div class="form-group">
+              <b>Description:</b><br/>
+              <textarea class="form-control input-sm" id='add-desc' rows="3"></textarea>
+            </div>
+          </div>
+          <div class='col-md-12'>
+            <div class='pull-right'>
+              <input type='button' id='add-submit' class='btn btn-primary btn-sm' value='Add to inventory'/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</template>
+
+<template name='inventory_update_modal'>
+  <div id="update-mdl" class="modal" show='false' role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h5 class="modal-title">Update</h5>
+        </div>
+        <div class='row'>
+          <div class='col-md-1'></div>
+          <div class='col-md-10'>
+            <div class='row'>
+              <div class='col-md-6'>
+                <div class="form-group">
+                  <b>Name:</b><br/><input type='text' class='form-control input-sm' id='update-name'/>
+                </div>
+              </div>
+              <div class='col-md-3'>
+                <div class="form-group">
+                  <b>Price:</b><br/><input type='number' class='form-control input-sm' id='update-price'/>
+                </div>
+              </div>
+              <div class='col-md-3'>
+                <div class="form-group">
+                  <b>Stock:</b><br/><input type='number' class='form-control input-sm' id='update-stock'/>
+                </div>
+              </div>
+              <div class='col-md-12'>
+                <div class="form-group">
+                  <b>Description:</b><br/>
+                  <textarea class="form-control input-sm" id='update-desc' rows="3"></textarea>
+                  <input type='hidden' class='form-control input-sm' id='update-id'/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class='col-md-1'></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-sm" id='save-update-btn'>Save</button>
+          <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+

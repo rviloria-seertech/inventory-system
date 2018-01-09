@@ -1,0 +1,47 @@
+<head>
+  <title>Inventory</title>
+</head>
+
+<template name='index'>
+  {{>page_header}}
+	{{>login}}
+</template>
+
+<template name="login">
+  <div class='container'>
+    <br/><br/><br/>
+    <div class='row'>
+      <div class='col-md-4'></div>
+      <div class='col-md-4'>
+        {{>login_form}}
+      </div>
+      <div class='col-md-4'></div>
+    </div>
+  </div>
+</template>
+
+<template name='login_form'>
+  <div class="panel panel-default">
+    <div class="panel-heading"><h5>Login</h5></div>
+    <div class="panel-body">
+      <center><h5 style='color:red' id='err-mssg'></h5></center>
+      <div class='row'>
+        <div class='col-md-12'>
+          <b>Username:</b><br/><input type='text' class='form-control' id='login-uname'/>
+        </div>
+        <div class='col-md-12'>
+          <br/>
+          <b>Password:</b><br/><input type='password' class='form-control' id='login-pword'/>
+        </div>
+        <div class='col-md-12'>
+          <br/>
+          <div class='pull-right'>
+           <button type="button" class="btn btn-success" id='login-btn'>Login</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+

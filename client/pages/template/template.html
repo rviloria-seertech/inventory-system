@@ -1,0 +1,16 @@
+<template name='page_header'>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Inventory</a>
+    </div>
+    {{#if isLoggedIn}}
+      <div class='pull-right'>
+        <ul class="nav navbar-nav">
+          <li><a href="#" id='logout-btn'>Logout</a></li>
+        </ul>
+      </div>
+    {{/if}}
+  </div>
+</nav>
+</template>
